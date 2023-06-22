@@ -11,14 +11,22 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pijami")
 @RequiredArgsConstructor
 public class PijamiController {
     @Autowired
     UnderRepository underRepository;
 
-    @GetMapping
+    @GetMapping("/pijami")
     public List<UnderWear> getAll(){
         return underRepository.findAll();
     }
+    @GetMapping("/pijami/sortCheap")
+    public List<UnderWear> getCheap(){
+        return underRepository.getCheap();
+    }
+    @GetMapping("/pijami/sortExp")
+    public List<UnderWear> getExp(){
+        return underRepository.getExp();
+    }
+
 }
