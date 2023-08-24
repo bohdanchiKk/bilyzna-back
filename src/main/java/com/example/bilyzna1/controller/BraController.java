@@ -1,6 +1,7 @@
 package com.example.bilyzna1.controller;
 
 import com.example.bilyzna1.entity.woman.Bra;
+import com.example.bilyzna1.repository.BraRepository;
 import com.example.bilyzna1.service.woman.BraService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,27 +30,34 @@ public class BraController {
 //        return braRepository.findById(id);
 //    }
 //
-//    @PostMapping("/admin/bra/{id}")
-//    public ResponseEntity<Bra> editBra(@RequestBody Bra bra){
-//        braRepository.save(bra);
-//        return ResponseEntity.ok(bra);
-//    }
-//    @DeleteMapping("/admin/bra/{id}")
-//    public void deleteBra(@PathVariable Long id){
-//        braRepository.deleteById(id);
-//    }
+
     private BraService braService;
+    private BraRepository braRepository;
     @Autowired
-    public BraController(BraService braService){
+    public BraController(BraService braService, BraRepository braRepository){
         this.braService = braService;
+        this.braRepository = braRepository;
     }
-    @GetMapping("/bra")
+    @GetMapping("/admin/bra")
     public List<Bra> findAll(){
         return braService.findAll();
     }
-    @PostMapping("/bra/post")
+    @GetMapping("/admin/bra/{id}")
+    public Optional<Bra> findById(@PathVariable Long id)
+    {return braService.findById(id);
+    }
+    @PostMapping("/admin/bra")
     public ResponseEntity<Bra> uploadBra(@RequestBody Bra bra){
         braService.add(bra);
         return ResponseEntity.ok(bra);
+    }
+    @PostMapping("/admin/bra/{id}")
+    public String updateBra(@PathVariable Long id,@RequestBody Bra bra){
+        braService.update(id,bra);
+        return "updated";
+    }
+    @DeleteMapping("/admin/bra/{id}")
+    public void deleteBra(@PathVariable Long id){
+        braService.delete(id);
     }
 }
