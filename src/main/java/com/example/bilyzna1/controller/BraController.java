@@ -14,29 +14,11 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 public class BraController {
-//    private final BraRepository braRepository;
-//    @PostMapping("/admin/bra")
-//    public Bra createBra(@RequestBody Bra bra){
-//        return braRepository.save(bra);
-//    }
-//
-//    @GetMapping("/admin/bra")
-//    public List<Bra> getAll(){
-//        return braRepository.findAll();
-//    }
-//
-//    @GetMapping("/admin/bra/{id}")
-//    public Optional<Bra> findById(@PathVariable Long id){
-//        return braRepository.findById(id);
-//    }
-//
 
     private BraService braService;
-    private BraRepository braRepository;
     @Autowired
-    public BraController(BraService braService, BraRepository braRepository){
+    public BraController(BraService braService){
         this.braService = braService;
-        this.braRepository = braRepository;
     }
     @GetMapping("/admin/bra")
     public List<Bra> findAll(){
@@ -59,5 +41,17 @@ public class BraController {
     @DeleteMapping("/admin/bra/{id}")
     public void deleteBra(@PathVariable Long id){
         braService.delete(id);
+    }
+    @GetMapping("/bra/new")
+    public ResponseEntity<List<Bra>> findNew(){
+       return braService.findNew();
+    }
+    @GetMapping("/bra/cheap")
+    public ResponseEntity<List<Bra>> findCheap(){
+        return braService.findCheap();
+    }
+    @GetMapping("/bra/exp")
+    public ResponseEntity<List<Bra>> findExp(){
+        return braService.findExp();
     }
 }

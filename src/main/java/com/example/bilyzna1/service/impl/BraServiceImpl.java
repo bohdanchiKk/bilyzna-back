@@ -4,6 +4,7 @@ import com.example.bilyzna1.entity.woman.Bra;
 import com.example.bilyzna1.repository.BraRepository;
 import com.example.bilyzna1.service.woman.BraService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,15 +23,14 @@ public class BraServiceImpl implements BraService {
     }
 
     @Override
-    public String add(Bra bra) {
+    public Optional<Bra> add(Bra bra) {
         braRepository.save(bra);
-        return "SAVED";
+        return Optional.of(bra);
     }
 
     @Override
-    public String delete(Long id) {
+    public void delete(Long id) {
         braRepository.deleteById(id);
-        return "deleted!!!";
     }
 
 
@@ -40,11 +40,25 @@ public class BraServiceImpl implements BraService {
     }
 
     @Override
-    public String update(Long id,Bra bra) {
+    public void update(Long id,Bra bra) {
         Optional<Bra> existed = braRepository.findById(id);
         existed = Optional.ofNullable(bra);
         braRepository.saveAndFlush(bra);
-        return "updated";
+    }
+
+    @Override
+    public ResponseEntity<List<Bra>> findNew() {
+        return ResponseEntity.ok(braRepository.findNew());
+    }
+
+    @Override
+    public ResponseEntity<List<Bra>> findCheap() {
+        return ResponseEntity.ok(braRepository.findCheap());
+    }
+
+    @Override
+    public ResponseEntity<List<Bra>> findExp() {
+        return ResponseEntity.ok(braRepository.findExp());
     }
 
 

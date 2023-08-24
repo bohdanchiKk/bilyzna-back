@@ -2,7 +2,10 @@ package com.example.bilyzna1.entity.woman;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -37,7 +40,8 @@ public class Bra {
     private String image1;
     @Column(name = "image2")
     private String image2;
-    @Column(name = "date")
-    private Date createdOn;
+    @Column(name = "created")
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
 }
