@@ -1,6 +1,6 @@
 package com.example.bilyzna1.controller;
 
-import com.example.bilyzna1.entity.UnderWear;
+import com.example.bilyzna1.entity.woman.WomUnderWear;
 import com.example.bilyzna1.repository.UnderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class BilyznaController {
     @Autowired
     UnderRepository underRepository;
     @GetMapping
-    public List<UnderWear> getAll(){
+    public List<WomUnderWear> getAll(){
         return underRepository.findAll();
     }
 }

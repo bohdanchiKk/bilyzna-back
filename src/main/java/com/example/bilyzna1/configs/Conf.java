@@ -12,6 +12,4 @@ public class Conf implements WebMvcConfigurer {
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*");
     }
-
-
 }

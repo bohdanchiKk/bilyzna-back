@@ -1,17 +1,19 @@
-package com.example.bilyzna1.entity;
+package com.example.bilyzna1.entity.woman;
 
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
+
 @Data
 @Entity
-@Table(name = "bra")
+@Table(name = "nightgowns")
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Getter
 @Setter
-public class Bra {
+public class Nightgowns {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,12 +30,13 @@ public class Bra {
     @Column(name = "type")
     private String type;
     @Column(name = "size")
-    private int size;
+    private String size;
     @Column(name = "description", length = 1000)
     private String description;
     @Column(name = "image1")
     private String image1;
     @Column(name = "image2")
     private String image2;
-
+    @Column(name = "date")
+    private Date createdOn;
 }

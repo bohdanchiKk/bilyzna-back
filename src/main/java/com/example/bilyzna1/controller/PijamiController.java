@@ -1,6 +1,7 @@
 package com.example.bilyzna1.controller;
 
-import com.example.bilyzna1.entity.UnderWear;
+
+import com.example.bilyzna1.entity.woman.WomUnderWear;
 import com.example.bilyzna1.repository.UnderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +16,16 @@ import java.util.List;
 public class PijamiController {
     @Autowired
     UnderRepository underRepository;
-
     @GetMapping("/pijami")
-    public List<UnderWear> getAll(){
+    public List<WomUnderWear> getAll(){
         return underRepository.findAll();
     }
     @GetMapping("/pijami/sortCheap")
-    public List<UnderWear> getCheap(){
+    public List<WomUnderWear> getCheap(){
         return underRepository.getCheap();
     }
     @GetMapping("/pijami/sortExp")
-    public List<UnderWear> getExp(){
+    public List<WomUnderWear> getExp(){
         return underRepository.getExp();
     }
 
