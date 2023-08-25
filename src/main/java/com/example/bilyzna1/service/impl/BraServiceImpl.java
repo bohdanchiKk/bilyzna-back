@@ -61,5 +61,10 @@ public class BraServiceImpl implements BraService {
         return ResponseEntity.ok(braRepository.findExp());
     }
 
+    @Override
+    public ResponseEntity<List<Bra>> findWithFilters(String brand, String type, String size) {
+        return ResponseEntity.ok(braRepository.findWithDynamicFilters(brand,type,size));
+    }
+
 
 }

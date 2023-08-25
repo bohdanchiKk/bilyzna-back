@@ -15,5 +15,6 @@ public interface BraService {
     ResponseEntity<List<Bra>> findNew();
     ResponseEntity<List<Bra>> findCheap();
     ResponseEntity<List<Bra>> findExp();
+    ResponseEntity<List<Bra>> findWithFilters(String brand,String type, String size);
 
 }

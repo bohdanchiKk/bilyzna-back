@@ -54,4 +54,8 @@ public class BraController {
     public ResponseEntity<List<Bra>> findExp(){
         return braService.findExp();
     }
+    @GetMapping("/bra/filter")
+    public ResponseEntity<List<Bra>> findFilter(@PathVariable String brand, @PathVariable String type, @PathVariable String size){
+        return braService.findWithFilters(brand,type,size);
+    }
 }
