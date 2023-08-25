@@ -25,6 +25,12 @@ public class ClothesServiceImpl implements ClothesService {
     public List<Clothes> findAllSpecific(Type type) {
         return clothesRepository.findByType(type);
     }
+
+    @Override
+    public List<Clothes> findAllSpecificAdmin(Type type) {
+        return clothesRepository.findByType(type);
+    }
+
     @Override
     public void add(Clothes clothes) {
         clothesRepository.save(clothes);
@@ -56,5 +62,10 @@ public class ClothesServiceImpl implements ClothesService {
     @Override
     public List<Clothes> findExp(Type type) {
         return clothesRepository.findByTypeOrderByPriceDesc(type);
+    }
+
+    @Override
+    public List<Clothes> findNew(Type type) {
+        return clothesRepository.findByTypeOrderByCreatedOnDesc(type);
     }
 }

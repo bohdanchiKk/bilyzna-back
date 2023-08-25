@@ -3,7 +3,10 @@ package com.example.bilyzna1.entity;
 import com.example.bilyzna1.Type;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -39,5 +42,6 @@ public class Clothes {
     @Column(name = "image2")
     private String image2;
     @Column(name = "date")
-    private Date createdOn;
+    @CreationTimestamp
+    private LocalDateTime createdOn;
 }
