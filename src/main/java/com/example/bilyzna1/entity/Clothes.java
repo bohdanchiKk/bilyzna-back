@@ -37,6 +37,8 @@ public class Clothes {
     private String size;
     @Column(name = "description", length = 1000)
     private String description;
+    @Column(name = "additionaltype")
+    private String additionaltype;
     @Column(name = "image1")
     private String image1;
     @Column(name = "image2")

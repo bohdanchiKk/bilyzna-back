@@ -13,9 +13,8 @@ import java.util.Optional;
 public interface ClothesRepository extends JpaRepository<Clothes,Long> {
     List<Clothes> findByType(Type type);
     Optional<Clothes> findById(Long id);
-    @Query("select c from Clothes c order by c.price DESC ")
+
     List<Clothes> findByTypeOrderByPriceDesc(Type type);
-    @Query("select c from Clothes c order by c.price ASC ")
     List<Clothes> findByTypeOrderByPriceAsc(Type type);
     List<Clothes> findByTypeOrderByCreatedOnDesc(Type type);
 }
