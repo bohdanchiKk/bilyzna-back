@@ -58,6 +58,13 @@ public class ClothesController {
     public List<Clothes> findNew(@PathVariable Type type){
         return  clothesService.findNew(type);
     }
+    @PostMapping
+    public List<Clothes> findWithFilter(@PathVariable Type type,
+                                        @PathVariable String additionaltype,
+                                        @PathVariable String size,
+                                        @PathVariable String brand){
+        return clothesService.findWithFilter(type,additionaltype,size,brand);
+    }
 //    @GetMapping("/admin/bra/{id}")
 //    public Optional<Bra> findById(@PathVariable Long id)
 //    {return braService.findById(id);

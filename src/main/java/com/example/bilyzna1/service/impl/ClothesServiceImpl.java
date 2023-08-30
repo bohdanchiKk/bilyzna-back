@@ -68,4 +68,9 @@ public class ClothesServiceImpl implements ClothesService {
     public List<Clothes> findNew(Type type) {
         return clothesRepository.findByTypeOrderByCreatedOnDesc(type);
     }
+
+    @Override
+    public List<Clothes> findWithFilter(Type type, String additionaltype, String size, String brand) {
+        return clothesRepository.findByTypeAndAdditionaltypeAndSizeAndBrand(type,additionaltype,size,brand);
+    }
 }

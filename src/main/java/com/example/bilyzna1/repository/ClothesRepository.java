@@ -17,4 +17,5 @@ public interface ClothesRepository extends JpaRepository<Clothes,Long> {
     List<Clothes> findByTypeOrderByPriceDesc(Type type);
     List<Clothes> findByTypeOrderByPriceAsc(Type type);
     List<Clothes> findByTypeOrderByCreatedOnDesc(Type type);
+    List<Clothes> findByTypeAndAdditionaltypeAndSizeAndBrand(Type type, String additionaltype, String size, String brand);
 }

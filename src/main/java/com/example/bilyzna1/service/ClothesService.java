@@ -17,4 +17,5 @@ public interface ClothesService {
     List<Clothes> findCheap(Type type);
     List<Clothes> findExp(Type type);
     List<Clothes> findNew(Type type);
+    List<Clothes> findWithFilter(Type type, String additionaltype, String size, String brand);
 }
