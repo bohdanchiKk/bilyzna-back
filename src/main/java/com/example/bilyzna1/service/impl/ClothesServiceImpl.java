@@ -69,8 +69,41 @@ public class ClothesServiceImpl implements ClothesService {
         return clothesRepository.findByTypeOrderByCreatedOnDesc(type);
     }
 
+
     @Override
-    public List<Clothes> findWithFilter(Type type, String additionaltype, String size, String brand) {
-        return clothesRepository.findByTypeAndAdditionaltypeAndSizeAndBrand(type,additionaltype,size,brand);
+    public List<Clothes> findByTypeAndBrand(Type type, String brand) {
+        return clothesRepository.findByTypeAndBrand(type,brand);
     }
+
+    @Override
+    public List<Clothes> findByTypeAndSize(Type type, String size) {
+        return clothesRepository.findByTypeAndSize(type,size);
+    }
+
+    @Override
+    public List<Clothes> findByTypeAndAdditionalType(Type type, String additionaltype) {
+        return clothesRepository.findByTypeAndAdditionaltype(type,additionaltype);
+    }
+
+    @Override
+    public List<Clothes> findByTypeAndBrandAndSize(Type type, String brand, String size) {
+        return clothesRepository.findByTypeAndBrandAndSize(type,brand,size);
+    }
+
+    @Override
+    public List<Clothes> findByTypeAndBrandAndSizeAndAdditionalType(Type type, String brand, String size, String additionaltype) {
+        return clothesRepository.findByTypeAndBrandAndSizeaAndAdditionaltype(type,brand,size,additionaltype);
+    }
+
+    @Override
+    public List<Clothes> findByTypeAndBrandAndAdditionalType(Type type, String brand, String additionaltype) {
+        return clothesRepository.findByTypeAndBrandAAndAdditionaltype(type,brand,additionaltype);
+    }
+
+    @Override
+    public List<Clothes> findByTypeAndSizeAndAdditionalType(Type type, String size, String additionaltype) {
+        return clothesRepository.findByTypeAndSizeaAndAdditionaltype(type,size,additionaltype);
+    }
+
+
 }

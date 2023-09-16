@@ -58,45 +58,47 @@ public class ClothesController {
     public List<Clothes> findNew(@PathVariable Type type){
         return  clothesService.findNew(type);
     }
-    @PostMapping
-    public List<Clothes> findWithFilter(@PathVariable Type type,
-                                        @PathVariable String additionaltype,
-                                        @PathVariable String size,
-                                        @PathVariable String brand){
-        return clothesService.findWithFilter(type,additionaltype,size,brand);
+
+    @GetMapping("/FindByTypeAndBrand")
+    public List<Clothes> findByTypeAndBrand(@RequestParam Type type,
+            @RequestParam String brand){
+        return clothesService.findByTypeAndBrand(type,brand);
     }
-//    @GetMapping("/admin/bra/{id}")
-//    public Optional<Bra> findById(@PathVariable Long id)
-//    {return braService.findById(id);
-//    }
-//    @PostMapping("/admin/bra")
-//    public ResponseEntity<Bra> uploadBra(@RequestBody Bra bra){
-//        braService.add(bra);
-//        return ResponseEntity.ok(bra);
-//    }
-//    @PostMapping("/admin/bra/{id}")
-//    public String updateBra(@PathVariable Long id,@RequestBody Bra bra){
-//        braService.update(id,bra);
-//        return "updated";
-//    }
-//    @DeleteMapping("/admin/bra/{id}")
-//    public void deleteBra(@PathVariable Long id){
-//        braService.delete(id);
-//    }
-//    @GetMapping("/bra/new")
-//    public ResponseEntity<List<Bra>> findNew(){
-//        return braService.findNew();
-//    }
-//    @GetMapping("/bra/cheap")
-//    public ResponseEntity<List<Bra>> findCheap(){
-//        return braService.findCheap();
-//    }
-//    @GetMapping("/bra/exp")
-//    public ResponseEntity<List<Bra>> findExp(){
-//        return braService.findExp();
-//    }
-//    @GetMapping("/bra/filter")
-//    public ResponseEntity<List<Bra>> findFilter(@PathVariable String brand, @PathVariable String type, @PathVariable String size){
-//        return braService.findWithFilters(brand,type,size);
-//    }
+    @GetMapping("/FindByTypeAndSize")
+    public List<Clothes> findTypeAndSize(@RequestParam Type type,
+                                     @RequestParam String size){
+        return clothesService.findByTypeAndSize(type,size);
+    }
+    @GetMapping("/FindByTypeAndAdditionalType")
+    public List<Clothes> findTypeAndAdditionalType(@RequestParam Type type,
+                                         @RequestParam String additionaltype){
+        return clothesService.findByTypeAndAdditionalType(type,additionaltype);
+    }
+    @GetMapping("/FindByTypeAndBrandAndSize")
+    public List<Clothes> findTypeAndBrandAndSize(@RequestParam Type type,
+                                                   @RequestParam String brand,
+                                                   @RequestParam String size){
+        return clothesService.findByTypeAndBrandAndSize(type,brand,size);
+    }
+    @GetMapping("/FindByTypeAndBrandAndSizeAndAdditionalType")
+    public List<Clothes> findByTypeAndBrandAndSizeAndAdditionalType(@RequestParam Type type,
+                                                 @RequestParam String brand,
+                                                 @RequestParam String size,
+                                                                    @RequestParam String additionaltype){
+        return clothesService.findByTypeAndBrandAndSizeAndAdditionalType(type,brand,size,additionaltype);
+    }
+    @GetMapping("/FindByTypeAndBrandAndAdditionalType")
+    public List<Clothes> findByTypeAndBrandAndSizeAndAdditionalType(@RequestParam Type type,
+                                                                    @RequestParam String brand,
+                                                                    @RequestParam String additionaltype){
+        return clothesService.findByTypeAndBrandAndAdditionalType(type,brand,additionaltype);
+    }
+    @GetMapping("/FindByTypeAndSizeAndAdditionalType")
+    public List<Clothes> findByTypeAndSizeAndAdditionalType(@RequestParam Type type,
+                                                                    @RequestParam String size,
+                                                                    @RequestParam String additionaltype){
+        return clothesService.findByTypeAndSizeAndAdditionalType(type,size,additionaltype);
+    }
+
+
 }

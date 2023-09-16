@@ -17,5 +17,13 @@ public interface ClothesService {
     List<Clothes> findCheap(Type type);
     List<Clothes> findExp(Type type);
     List<Clothes> findNew(Type type);
-    List<Clothes> findWithFilter(Type type, String additionaltype, String size, String brand);
+    List<Clothes> findByTypeAndBrand(Type type,String brand);
+    List<Clothes> findByTypeAndSize(Type type,String size);
+    List<Clothes> findByTypeAndAdditionalType(Type type,String additionaltype);
+    List<Clothes> findByTypeAndBrandAndSize(Type type,String brand,String size);
+    List<Clothes> findByTypeAndBrandAndSizeAndAdditionalType(Type type,String brand,String size,String additionaltype);
+    List<Clothes> findByTypeAndBrandAndAdditionalType(Type type,String brand,String additionaltype);
+    List<Clothes> findByTypeAndSizeAndAdditionalType(Type type,String size,String additionaltype);
+
+
 }
