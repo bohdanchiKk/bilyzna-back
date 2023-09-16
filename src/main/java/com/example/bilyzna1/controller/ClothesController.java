@@ -69,7 +69,8 @@ public class ClothesController {
                                      @RequestParam String size){
         return clothesService.findByTypeAndSize(type,size);
     }
-//    sdsdsd
+//    sdsdsd.
+    //sdsdsd
     @GetMapping("/FindByTypeAndAdditionalType")
     public List<Clothes> findTypeAndAdditionalType(@RequestParam Type type,
                                          @RequestParam String additionaltype){
