@@ -61,58 +61,120 @@ public class ClothesController {
     }
     @GetMapping("/{type}/cheap")
     public List<Clothes> findCheap(@PathVariable Type type){
-        return clothesService.findCheap(type);
+        var clothes =  clothesService.findCheap(type);
+        var newclother = clothes.stream()
+                .collect(Collectors.toMap(Clothes::getImage1, e->e,(existing,replacement) ->existing))
+                .values()
+                .stream()
+                .collect(Collectors.toList());
+        return newclother;
+
     }
     @GetMapping("/{type}/exp")
     public List<Clothes> findExp(@PathVariable Type type){
-        return  clothesService.findExp(type);
+        var clothes = clothesService.findExp(type);
+        var newclother = clothes.stream()
+                .collect(Collectors.toMap(Clothes::getImage1, e->e,(existing,replacement) ->existing))
+                .values()
+                .stream()
+                .collect(Collectors.toList());
+        return newclother;
+
     }
     @GetMapping("/{type}/new")
     public List<Clothes> findNew(@PathVariable Type type){
-        return  clothesService.findNew(type);
+        var clothes =  clothesService.findNew(type);
+        var newclother = clothes.stream()
+                .collect(Collectors.toMap(Clothes::getImage1, e->e,(existing,replacement) ->existing))
+                .values()
+                .stream()
+                .collect(Collectors.toList());
+        return newclother;
     }
 
     @GetMapping("/FindByTypeAndBrand")
     public List<Clothes> findByTypeAndBrand(@RequestParam Type type,
             @RequestParam String brand){
-        return clothesService.findByTypeAndBrand(type,brand);
+        var clothes =  clothesService.findByTypeAndBrand(type,brand);
+        var newclother = clothes.stream()
+                .collect(Collectors.toMap(Clothes::getImage1, e->e,(existing,replacement) ->existing))
+                .values()
+                .stream()
+                .collect(Collectors.toList());
+        return newclother;
     }
     @GetMapping("/FindByTypeAndSize")
     public List<Clothes> findTypeAndSize(@RequestParam Type type,
                                      @RequestParam String size){
-        return clothesService.findByTypeAndSize(type,size);
+        var clothes = clothesService.findByTypeAndSize(type,size);
+        var newclother = clothes.stream()
+                .collect(Collectors.toMap(Clothes::getImage1, e->e,(existing,replacement) ->existing))
+                .values()
+                .stream()
+                .collect(Collectors.toList());
+        return newclother;
     }
 //    sdsdsd.
     //sdsdsd
     @GetMapping("/FindByTypeAndAdditionalType")
     public List<Clothes> findTypeAndAdditionalType(@RequestParam Type type,
                                          @RequestParam String additionaltype){
-        return clothesService.findByTypeAndAdditionalType(type,additionaltype);
+        var clothes =  clothesService.findByTypeAndAdditionalType(type,additionaltype);
+        var newclother = clothes.stream()
+                .collect(Collectors.toMap(Clothes::getImage1, e->e,(existing,replacement) ->existing))
+                .values()
+                .stream()
+                .collect(Collectors.toList());
+        return newclother;
     }
     @GetMapping("/FindByTypeAndBrandAndSize")
     public List<Clothes> findTypeAndBrandAndSize(@RequestParam Type type,
                                                    @RequestParam String brand,
                                                    @RequestParam String size){
-        return clothesService.findByTypeAndBrandAndSize(type,brand,size);
+        var clothes = clothesService.findByTypeAndBrandAndSize(type,brand,size);
+        var newclother = clothes.stream()
+                .collect(Collectors.toMap(Clothes::getImage1, e->e,(existing,replacement) ->existing))
+                .values()
+                .stream()
+                .collect(Collectors.toList());
+        return newclother;
     }
     @GetMapping("/FindByTypeAndBrandAndSizeAndAdditionalType")
     public List<Clothes> findByTypeAndBrandAndSizeAndAdditionalType(@RequestParam Type type,
                                                  @RequestParam String brand,
                                                  @RequestParam String size,
                                                                     @RequestParam String additionaltype){
-        return clothesService.findByTypeAndBrandAndSizeAndAdditionalType(type,brand,size,additionaltype);
+        var clothes =  clothesService.findByTypeAndBrandAndSizeAndAdditionalType(type,brand,size,additionaltype);
+        var newclother = clothes.stream()
+                .collect(Collectors.toMap(Clothes::getImage1, e->e,(existing,replacement) ->existing))
+                .values()
+                .stream()
+                .collect(Collectors.toList());
+        return newclother;
     }
     @GetMapping("/FindByTypeAndBrandAndAdditionalType")
     public List<Clothes> findByTypeAndBrandAndSizeAndAdditionalType(@RequestParam Type type,
                                                                     @RequestParam String brand,
                                                                     @RequestParam String additionaltype){
-        return clothesService.findByTypeAndBrandAndAdditionalType(type,brand,additionaltype);
+        var clothes = clothesService.findByTypeAndBrandAndAdditionalType(type,brand,additionaltype);
+        var newclother = clothes.stream()
+                .collect(Collectors.toMap(Clothes::getImage1, e->e,(existing,replacement) ->existing))
+                .values()
+                .stream()
+                .collect(Collectors.toList());
+        return newclother;
     }
     @GetMapping("/FindByTypeAndSizeAndAdditionalType")
     public List<Clothes> findByTypeAndSizeAndAdditionalType(@RequestParam Type type,
                                                                     @RequestParam String size,
                                                                     @RequestParam String additionaltype){
-        return clothesService.findByTypeAndSizeAndAdditionalType(type,size,additionaltype);
+        var clothes = clothesService.findByTypeAndSizeAndAdditionalType(type,size,additionaltype);
+        var newclother = clothes.stream()
+                .collect(Collectors.toMap(Clothes::getImage1, e->e,(existing,replacement) ->existing))
+                .values()
+                .stream()
+                .collect(Collectors.toList());
+        return newclother;
     }
 
 
