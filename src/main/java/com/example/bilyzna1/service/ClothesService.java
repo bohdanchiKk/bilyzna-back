@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ClothesService {
-    List<Clothes> findAll();
+    List<Clothes> findByType(Type type);
+    List<Clothes> findNewest();
     List<Clothes> findAllSpecific(Type type);
-    List<Clothes> findAllSpecificAdmin(Type type);
     void add(Clothes clothes);
     Optional<Clothes> update(Long id,Clothes clothes);
     Optional<Clothes> findById(Long id);

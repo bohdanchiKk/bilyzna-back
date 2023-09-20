@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,10 +35,27 @@ public class ClothesController {
         return newclother;
     }
     @GetMapping("/article/{article}")
-    public List<Clothes> findByArticle(@PathVariable String article)
+    public List<String> findByArticle(@PathVariable String article)
     {
-        return clothesService.findByArticle(article);
+        var clothes = clothesService.findByArticle(article);
+        List<String> sizes = new ArrayList<>();
+        for(Clothes c : clothes){
+            sizes.add(c.getSize());
+        }
+        return sizes;
     }
+    @GetMapping("/admin/t/{type}")
+    public List<Clothes> findByAll(@PathVariable Type type)
+    {
+        return clothesService.findByType(type);
+    }
+    @GetMapping("/newest")
+    public List<Clothes> findBNewest()
+    {
+        return clothesService.findNewest();
+    }
+
+
 
     @PostMapping("/admin/add")
     public ResponseEntity<Clothes> add(@RequestBody Clothes clothes){

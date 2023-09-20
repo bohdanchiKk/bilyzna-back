@@ -16,9 +16,16 @@ public class ClothesServiceImpl implements ClothesService {
     public ClothesServiceImpl(ClothesRepository clothesRepository){
         this.clothesRepository = clothesRepository;
     }
+
+
     @Override
-    public List<Clothes> findAll() {
-        return clothesRepository.findAll();
+    public List<Clothes> findByType(Type type) {
+        return clothesRepository.findByType(type);
+    }
+
+    @Override
+    public List<Clothes> findNewest() {
+        return clothesRepository.findAllByCreatedOn();
     }
 
     @Override
@@ -26,10 +33,6 @@ public class ClothesServiceImpl implements ClothesService {
         return clothesRepository.findByType(type);
     }
 
-    @Override
-    public List<Clothes> findAllSpecificAdmin(Type type) {
-        return clothesRepository.findByType(type);
-    }
 
     @Override
     public void add(Clothes clothes) {
