@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,7 +25,18 @@ public class ClothesController {
     @GetMapping("/{type}")
     public List<Clothes> findAllSpecific(@PathVariable Type type)
     {
-        return clothesService.findAllSpecific(type);
+        var clothes = clothesService.findAllSpecific(type);
+       var newclother = clothes.stream()
+                .collect(Collectors.toMap(Clothes::getImage1, e->e,(existing,replacement) ->existing))
+                .values()
+                .stream()
+                .collect(Collectors.toList());
+        return newclother;
+    }
+    @GetMapping("/article/{article}")
+    public List<Clothes> findByArticle(@PathVariable String article)
+    {
+        return clothesService.findByArticle(article);
     }
 
     @PostMapping("/admin/add")

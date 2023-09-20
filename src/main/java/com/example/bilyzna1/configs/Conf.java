@@ -11,5 +11,7 @@ public class Conf implements WebMvcConfigurer {
                 .allowedOrigins("http://localhost:3000") // Update with the origin of your React app
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*");
+
+
     }
 }

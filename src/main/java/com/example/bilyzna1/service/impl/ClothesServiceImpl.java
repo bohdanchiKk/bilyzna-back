@@ -69,6 +69,11 @@ public class ClothesServiceImpl implements ClothesService {
         return clothesRepository.findByTypeOrderByCreatedOnDesc(type);
     }
 
+    @Override
+    public List<Clothes> findByArticle(String article) {
+       return clothesRepository.findByArticle(article);
+    }
+
 
     @Override
     public List<Clothes> findByTypeAndBrand(Type type, String brand) {
