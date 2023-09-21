@@ -25,7 +25,7 @@ public class ClothesServiceImpl implements ClothesService {
 
     @Override
     public List<Clothes> findNewest() {
-        return clothesRepository.findAllByCreatedOn();
+        return clothesRepository.findNewest();
     }
 
     @Override

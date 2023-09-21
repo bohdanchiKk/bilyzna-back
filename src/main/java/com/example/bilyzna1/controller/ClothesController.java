@@ -52,11 +52,14 @@ public class ClothesController {
     @GetMapping("/newest")
     public List<Clothes> findBNewest()
     {
-        return clothesService.findNewest();
+        var clothes = clothesService.findNewest();
+        var newclother = clothes.stream()
+                .collect(Collectors.toMap(Clothes::getImage1, e->e,(existing,replacement) ->existing))
+                .values()
+                .stream()
+                .collect(Collectors.toList());
+        return newclother;
     }
-
-
-
     @PostMapping("/admin/add")
     public ResponseEntity<Clothes> add(@RequestBody Clothes clothes){
         clothesService.add(clothes);

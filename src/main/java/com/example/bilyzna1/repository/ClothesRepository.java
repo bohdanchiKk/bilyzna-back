@@ -13,7 +13,8 @@ import java.util.Optional;
 @Repository
 public interface ClothesRepository extends JpaRepository<Clothes,Long> {
     List<Clothes> findByType(Type type);
-    List<Clothes> findAllByCreatedOn();
+    @Query("SELECT c FROM Clothes c ORDER BY c.createdOn DESC LIMIT 14")
+    List<Clothes> findNewest();
     Optional<Clothes> findById(Long id);
 
 
