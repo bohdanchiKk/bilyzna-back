@@ -43,7 +43,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf->csrf.disable())
                 .authorizeHttpRequests(auth->{
-                    auth.requestMatchers("/seucred").authenticated();
+                    auth.requestMatchers("/secured").authenticated();
                     auth.requestMatchers("/info").authenticated();
                     auth.requestMatchers("/admin").hasRole("ADMIN");
                     auth.anyRequest().permitAll();
@@ -73,7 +73,7 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000/login","http://localhost:3000/admin/add"));
+        configuration.setAllowedOrigins(List.of("http://localhost:4200","http://localhost:4200/admin/add"));
         configuration.setAllowedMethods(List.of("GET","POST"));
         configuration.setAllowedHeaders(List.of("Authorization","Content-Type"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

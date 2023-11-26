@@ -135,6 +135,10 @@ public class ClothesController {
                 .collect(Collectors.toList());
         return newclother;
     }
+    public static void NewMothid(){
+        for (int i = 0; i<10; i++){
+        }
+    }
 //    sdsdsd.
     //sdsdsd
     @GetMapping("/FindByTypeAndAdditionalType")
