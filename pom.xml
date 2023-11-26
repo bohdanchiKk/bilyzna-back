@@ -14,6 +14,8 @@
     <name>bilyzna1.0</name>
     <description>bilyzna1.0</description>
     <properties>
+            <!-- Other properties -->
+            <maven.plugin.validation>none</maven.plugin.validation>
         <java.version>17</java.version>
     </properties>
     <dependencies>
