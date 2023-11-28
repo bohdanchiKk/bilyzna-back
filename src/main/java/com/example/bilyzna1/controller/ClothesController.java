@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -57,6 +57,7 @@ public class ClothesController {
                 .collect(Collectors.toMap(Clothes::getImage1, e->e,(existing,replacement) ->existing))
                 .values()
                 .stream()
+                .sorted((c1, c2) -> c2.getCreatedOn().compareTo(c1.getCreatedOn()))
                 .collect(Collectors.toList());
         return newclother;
     }
@@ -87,6 +88,7 @@ public class ClothesController {
                 .collect(Collectors.toMap(Clothes::getImage1, e->e,(existing,replacement) ->existing))
                 .values()
                 .stream()
+                .sorted((c1, c2) -> c1.getPrice()-c2.getPrice())
                 .collect(Collectors.toList());
         return newclother;
 
@@ -98,6 +100,7 @@ public class ClothesController {
                 .collect(Collectors.toMap(Clothes::getImage1, e->e,(existing,replacement) ->existing))
                 .values()
                 .stream()
+                .sorted((c1, c2) -> c2.getPrice()-c1.getPrice())
                 .collect(Collectors.toList());
         return newclother;
 
@@ -109,6 +112,7 @@ public class ClothesController {
                 .collect(Collectors.toMap(Clothes::getImage1, e->e,(existing,replacement) ->existing))
                 .values()
                 .stream()
+                .sorted((c1, c2) -> c2.getCreatedOn().compareTo(c1.getCreatedOn()))
                 .collect(Collectors.toList());
         return newclother;
     }
@@ -135,12 +139,8 @@ public class ClothesController {
                 .collect(Collectors.toList());
         return newclother;
     }
-    public static void NewMothid(){
-        for (int i = 0; i<10; i++){
-        }
-    }
-//    sdsdsd.
-    //sdsdsd
+
+
     @GetMapping("/FindByTypeAndAdditionalType")
     public List<Clothes> findTypeAndAdditionalType(@RequestParam Type type,
                                          @RequestParam String additionaltype){
