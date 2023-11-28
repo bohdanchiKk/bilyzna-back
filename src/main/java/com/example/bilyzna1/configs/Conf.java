@@ -8,7 +8,7 @@ public class Conf implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Allow CORS for all paths
-                .allowedOrigins("http://localhost:4200") // Update with the origin of your React app
+                .allowedOrigins("https://bilyzna-boutique.vercel.app") // Update with the origin of your React app
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*");
     }
