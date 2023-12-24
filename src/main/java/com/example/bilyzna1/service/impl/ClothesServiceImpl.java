@@ -6,13 +6,12 @@ import com.example.bilyzna1.repository.ClothesRepository;
 import com.example.bilyzna1.service.ClothesService;
 import org.springframework.stereotype.Service;
 
-import javax.xml.bind.annotation.W3CDomHandler;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ClothesServiceImpl implements ClothesService {
-    private  ClothesRepository clothesRepository;
+    private final ClothesRepository clothesRepository;
    
     public ClothesServiceImpl(ClothesRepository clothesRepository){
         this.clothesRepository = clothesRepository;
@@ -42,9 +41,7 @@ public class ClothesServiceImpl implements ClothesService {
 
     @Override
     public Optional<Clothes> update(Long id,Clothes clothes) {
-        Optional<Clothes> old = clothesRepository.findById(id);
-        old = Optional.ofNullable(clothes);
-        Clothes save = clothesRepository.saveAndFlush(clothes);
+        clothesRepository.saveAndFlush(clothes);
         return clothesRepository.findById(id);
     }
 
