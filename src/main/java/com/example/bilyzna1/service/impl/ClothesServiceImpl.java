@@ -6,6 +6,7 @@ import com.example.bilyzna1.repository.ClothesRepository;
 import com.example.bilyzna1.service.ClothesService;
 import org.springframework.stereotype.Service;
 
+import javax.xml.bind.annotation.W3CDomHandler;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,6 +56,11 @@ public class ClothesServiceImpl implements ClothesService {
     @Override
     public void deleteById(Long id) {
         clothesRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<List<Clothes>> findByFirstWord(String word) {
+        return clothesRepository.findByFirstWord(word);
     }
 
     @Override

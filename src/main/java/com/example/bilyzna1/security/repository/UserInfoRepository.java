@@ -1,13 +1,14 @@
 package com.example.bilyzna1.security.repository;
 
-import com.example.bilyzna1.security.entity.User;
+
+import com.example.bilyzna1.security.entity.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User,Long> {
-    Optional<User> findByUsername(String username);
-
+public interface UserInfoRepository extends JpaRepository<UserInfo, Integer> {
+    Optional<UserInfo> findByUsername(String username);
 }
+

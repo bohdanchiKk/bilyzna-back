@@ -2,6 +2,8 @@ package com.example.bilyzna1.controller;
 
 import com.example.bilyzna1.Type;
 import com.example.bilyzna1.entity.Clothes;
+import com.example.bilyzna1.entity.SearchItems;
+import com.example.bilyzna1.repository.SearchItemsRepository;
 import com.example.bilyzna1.service.ClothesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -18,11 +21,65 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ClothesController {
     private ClothesService clothesService;
+    private SearchItemsRepository searchItemsRepository;
     @Autowired
-    public ClothesController(ClothesService clothesService)
+    public ClothesController(ClothesService clothesService,SearchItemsRepository searchItemsRepository)
     {
         this.clothesService = clothesService;
+        this.searchItemsRepository = searchItemsRepository;
     }
+
+    /** ADMIN PANEL */
+
+    @GetMapping("/admin/t/{type}")
+    public List<Clothes> findByAll(@PathVariable Type type)
+    {
+        return clothesService.findByType(type);
+    }
+    @PostMapping("/admin/add")
+    public ResponseEntity<Clothes> add(@RequestBody Clothes clothes){
+        clothesService.add(clothes);
+        if(!alreadyExist(clothes.getName())){
+            SearchItems searchItem = new SearchItems();
+            searchItem.setName(clothes.getName());
+            searchItem.setImage(clothes.getImage1());
+            searchItemsRepository.save(searchItem);
+            return ResponseEntity.ok(clothes);
+        }
+        return ResponseEntity.ok(clothes);
+    }
+    public boolean alreadyExist(String name){
+        if(searchItemsRepository.findByName(name)!=null){
+            return true;
+        }
+        return false;
+    }
+    @GetMapping("/admin/{id}")
+    public ResponseEntity<Optional<Clothes>> getById(@PathVariable Long id){
+        return ResponseEntity.ok(clothesService.findById(id));
+    }
+
+    @PostMapping("/admin/{id}")
+    public ResponseEntity<Optional<Clothes>> update(@PathVariable Long id,@RequestBody Clothes clothes){
+        clothesService.update(id,clothes);
+        return ResponseEntity.ok(clothesService.findById(id));
+    }
+    @DeleteMapping("/admin/{id}")
+    public ResponseEntity<String> update(@PathVariable Long id){
+        clothesService.deleteById(id);
+        return ResponseEntity.ok("kanae!");
+    }
+    /** SEARCH BAR */
+    @PostMapping("/")
+    public ResponseEntity<Optional<List<SearchItems>>> searchTop5ByFirstLetters(@RequestParam String word){
+       var foundClothes = searchItemsRepository.findByWord(word);
+        return ResponseEntity.ok(Optional.ofNullable(foundClothes));
+    }
+
+    /**             */
+
+    /** SORTINGS */
+
     @GetMapping("/{type}")
     public List<Clothes> findAllSpecific(@PathVariable Type type)
     {
@@ -44,11 +101,7 @@ public class ClothesController {
         }
         return sizes;
     }
-    @GetMapping("/admin/t/{type}")
-    public List<Clothes> findByAll(@PathVariable Type type)
-    {
-        return clothesService.findByType(type);
-    }
+
     @GetMapping("/newest")
     public List<Clothes> findBNewest()
     {
@@ -61,26 +114,7 @@ public class ClothesController {
                 .collect(Collectors.toList());
         return newclother;
     }
-    @PostMapping("/admin/add")
-    public ResponseEntity<Clothes> add(@RequestBody Clothes clothes){
-        clothesService.add(clothes);
-        return ResponseEntity.ok(clothes);
-    }
-    @GetMapping("/admin/{id}")
-    public ResponseEntity<Optional<Clothes>> getById(@PathVariable Long id){
-        return ResponseEntity.ok(clothesService.findById(id));
-    }
 
-    @PostMapping("/admin/{id}")
-    public ResponseEntity<Optional<Clothes>> update(@PathVariable Long id,@RequestBody Clothes clothes){
-        clothesService.update(id,clothes);
-        return ResponseEntity.ok(clothesService.findById(id));
-    }
-    @DeleteMapping("/admin/{id}")
-    public ResponseEntity<String> update(@PathVariable Long id){
-        clothesService.deleteById(id);
-        return ResponseEntity.ok("kanae!");
-    }
     @GetMapping("/{type}/cheap")
     public List<Clothes> findCheap(@PathVariable Type type){
         var clothes =  clothesService.findCheap(type);

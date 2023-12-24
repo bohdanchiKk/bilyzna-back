@@ -7,13 +7,16 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ClothesService {
-    List<Clothes> findByType(Type type);
-    List<Clothes> findNewest();
-    List<Clothes> findAllSpecific(Type type);
+    /** ADMIN PANEL */
     void add(Clothes clothes);
     Optional<Clothes> update(Long id,Clothes clothes);
     Optional<Clothes> findById(Long id);
     void deleteById(Long id);
+    /** SEARCH AND SORTINGS */
+    Optional<List<Clothes>> findByFirstWord(String word); //Searching bar
+    List<Clothes> findAllSpecific(Type type);
+    List<Clothes> findByType(Type type);
+    List<Clothes> findNewest();
     List<Clothes> findCheap(Type type);
     List<Clothes> findExp(Type type);
     List<Clothes> findNew(Type type);
