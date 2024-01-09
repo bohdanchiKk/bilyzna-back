@@ -24,8 +24,6 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
-import java.util.Collections;
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -48,10 +46,8 @@ public class SecurityConfig {
                 .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer
                         .configurationSource(request -> {
                             CorsConfiguration corsConfig = new CorsConfiguration();
-                            corsConfig.setAllowedOrigins(Collections.singletonList("https://www.bilyznaboutique.com.ua"));
-                            corsConfig.addAllowedMethod(HttpMethod.DELETE);
-                            corsConfig.addAllowedMethod(HttpMethod.GET);
-                            corsConfig.addAllowedMethod(HttpMethod.POST);
+                            corsConfig.applyPermitDefaultValues();
+                            corsConfig.addAllowedMethod(HttpMethod.DELETE); // Allow DELETE method
                             return corsConfig;
                         }))
                 .exceptionHandling(exceptions->exceptions.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
