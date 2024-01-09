@@ -29,5 +29,4 @@ public interface ClothesService {
     List<Clothes> findByTypeAndBrandAndAdditionalType(Type type,String brand,String additionaltype);
     List<Clothes> findByTypeAndSizeAndAdditionalType(Type type,String size,String additionaltype);
 
-
 }

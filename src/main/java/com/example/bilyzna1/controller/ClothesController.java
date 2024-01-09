@@ -15,7 +15,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 @RestController
@@ -119,8 +118,6 @@ public class ClothesController {
                 .stream()
                 .sorted(Comparator.comparingInt(Clothes::getPrice))
                 .collect(Collectors.toList());
-
-
     }
     @GetMapping("/{type}/exp")
     public List<Clothes> findExp(@PathVariable Type type){
@@ -212,12 +209,14 @@ public class ClothesController {
         return new ArrayList<>(clothes.stream()
                 .collect(Collectors.toMap(Clothes::getImage1, e -> e, (existing, replacement) -> existing))
                 .values());
+        }
+    @GetMapping("/id/{id}")
+    public Optional<Clothes> findOne(@PathVariable Long id) {
+        return clothesService.findById(id);
+    }
 //        var newclother = clothes.stream()
 //                .collect(Collectors.toMap(Clothes::getImage1, e->e,(existing,replacement) ->existing))
 //                .values()
 //                .stream()
 //                .collect(Collectors.toList());
     }
-
-
-}
