@@ -49,11 +49,7 @@ public class SecurityConfig {
                 .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer
                         .configurationSource(request -> {
                             CorsConfiguration corsConfig = new CorsConfiguration();
-                            corsConfig.setAllowedOrigins(Collections.singletonList("https://www.bilyznaboutique.com.ua"));
-                            corsConfig.setAllowedHeaders(Collections.singletonList("*"));
-                            corsConfig.setExposedHeaders(Collections.singletonList(""));
-                            corsConfig.setAllowCredentials(false);
-                            corsConfig.setMaxAge(-1L);
+                            corsConfig.setAllowedOrigins(Collections.singletonList("https://www.bilyznaboutique.com.ua/"));                            corsConfig.applyPermitDefaultValues();
                             corsConfig.addAllowedMethod(HttpMethod.DELETE); // Allow DELETE method
                             return corsConfig;
                         }))
