@@ -50,6 +50,8 @@ public class SecurityConfig {
                             CorsConfiguration corsConfig = new CorsConfiguration();
                             corsConfig.setAllowedOrigins(Collections.singletonList("https://www.bilyznaboutique.com.ua"));
                             corsConfig.addAllowedMethod(HttpMethod.DELETE);
+                            corsConfig.addAllowedMethod(HttpMethod.GET);
+                            corsConfig.addAllowedMethod(HttpMethod.POST);
                             return corsConfig;
                         }))
                 .exceptionHandling(exceptions->exceptions.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
