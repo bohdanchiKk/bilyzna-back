@@ -48,7 +48,7 @@ public class SecurityConfig {
                 .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer
                         .configurationSource(request -> {
                             CorsConfiguration corsConfig = new CorsConfiguration();
-                            corsConfig.setAllowedOrigins(Collections.singletonList("https://*.bilyznaboutique.com.ua"));
+                            corsConfig.setAllowedOrigins(Collections.singletonList("https://www.bilyznaboutique.com.ua"));
                             corsConfig.addAllowedMethod(HttpMethod.DELETE);
                             corsConfig.addAllowedMethod(HttpMethod.GET);
                             corsConfig.addAllowedMethod(HttpMethod.POST);
