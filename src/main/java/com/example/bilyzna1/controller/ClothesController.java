@@ -85,16 +85,7 @@ public class ClothesController {
                .values());
 
     }
-    @GetMapping("/article/{article}")
-    public List<String> findByArticle(@PathVariable String article)
-    {
-        var clothes = clothesService.findByArticle(article);
-        List<String> sizes = new ArrayList<>();
-        for(Clothes c : clothes){
-            sizes.add(c.getSize());
-        }
-        return sizes;
-    }
+
 
     @GetMapping("/newest")
     public List<Clothes> findBNewest()

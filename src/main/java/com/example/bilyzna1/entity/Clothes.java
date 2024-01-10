@@ -8,6 +8,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -34,7 +35,8 @@ public class Clothes {
     @Column(name = "type")
     private Type type;
     @Column(name = "size")
-    private String size;
+    @ElementCollection
+    private List<String> size;
     @Column(name = "description", length = 1000)
     private String description;
     @Column(name = "additionaltype")
