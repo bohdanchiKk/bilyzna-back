@@ -50,8 +50,6 @@ public class SecurityConfig {
                         .configurationSource(request -> {
                             CorsConfiguration corsConfig = new CorsConfiguration();
                             corsConfig.setAllowedOrigins(Collections.singletonList("https://www.bilyznaboutique.com.ua/"));
-                            corsConfig.addAllowedOrigin("192.168.3.1:8080/");
-                            corsConfig.addAllowedOrigin("192.168.3.107:8080/");
                             corsConfig.applyPermitDefaultValues();
                             corsConfig.addAllowedMethod(HttpMethod.DELETE); // Allow DELETE method
                             return corsConfig;

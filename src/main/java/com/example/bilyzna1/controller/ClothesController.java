@@ -61,7 +61,7 @@ public class ClothesController {
         clothesService.update(id,clothes);
         return ResponseEntity.ok(clothesService.findById(id));
     }
-    @CrossOrigin("http://example.com")
+
     @DeleteMapping("/admin/{id}")
     public ResponseEntity<String> update(@PathVariable Long id){
         clothesService.deleteById(id);
