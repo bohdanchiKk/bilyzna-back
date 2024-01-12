@@ -113,7 +113,7 @@ public class ClothesServiceImpl implements ClothesService {
 
     @Override
     public List<Clothes> findByTypeAndSizeAndAdditionalType(Type type, String size, String additionaltype) {
-        return clothesRepository.findByTypeAndSizeaAndAdditionaltype(type,size,additionaltype);
+        return clothesRepository.findByTypeAndSizeAndAdditionaltype(type,size,additionaltype);
     }
 
 
