@@ -41,10 +41,9 @@ public class Clothes {
     private String description;
     @Column(name = "additionaltype")
     private String additionaltype;
-    @Column(name = "image1")
-    private String image1;
-    @Column(name = "image2")
-    private String image2;
+    @Column(name = "images")
+    @ElementCollection
+    private List<String> images;
     @Column(name = "date")
     @CreationTimestamp
     private LocalDateTime createdOn;
