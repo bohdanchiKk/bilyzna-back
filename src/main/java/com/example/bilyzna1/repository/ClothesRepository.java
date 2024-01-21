@@ -42,8 +42,9 @@ public interface ClothesRepository extends JpaRepository<Clothes, Long> {
                                                       @Param("additionaltype") String additionaltype);
     List<Clothes> findByTypeAndSizeAndAdditionaltype(Type type,String size, String additionaltype);
 //    @Query("SELECT c FROM Clothes c WHERE c.name ILIKE :word% ORDER BY c.createdOn DESC LIMIT 5")
-@Query("SELECT c FROM Clothes c WHERE c.name ILIKE :word% AND c.image1 IS NOT NULL GROUP BY c.id, c.name, c.image1 ORDER BY MAX(c.createdOn) DESC LIMIT 5")
-Optional<List<Clothes>> findByFirstWord(@Param("word") String word);
+
+//@Query("SELECT c FROM Clothes c WHERE c.name ILIKE :word% AND c.image1 IS NOT NULL GROUP BY c.id, c.name, c.image1 ORDER BY MAX(c.createdOn) DESC LIMIT 5")
+//Optional<List<Clothes>> findByFirstWord(@Param("word") String word);
 
 
 }

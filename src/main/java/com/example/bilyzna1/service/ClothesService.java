@@ -13,7 +13,7 @@ public interface ClothesService {
     Optional<Clothes> findById(Long id);
     void deleteById(Long id);
     /** SEARCH AND SORTINGS */
-    Optional<List<Clothes>> findByFirstWord(String word); //Searching bar
+//    Optional<List<Clothes>> findByFirstWord(String word); //Searching bar
     List<Clothes> findAllSpecific(Type type);
     List<Clothes> findByType(Type type);
     List<Clothes> findNewest();

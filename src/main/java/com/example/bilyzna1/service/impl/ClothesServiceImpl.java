@@ -55,10 +55,10 @@ public class ClothesServiceImpl implements ClothesService {
         clothesRepository.deleteById(id);
     }
 
-    @Override
-    public Optional<List<Clothes>> findByFirstWord(String word) {
-        return clothesRepository.findByFirstWord(word);
-    }
+//    @Override
+//    public Optional<List<Clothes>> findByFirstWord(String word) {
+//        return clothesRepository.findByFirstWord(word);
+//    }
 
     @Override
     public List<Clothes> findCheap(Type type) {
