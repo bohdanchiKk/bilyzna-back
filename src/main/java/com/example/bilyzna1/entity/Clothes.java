@@ -3,10 +3,12 @@ package com.example.bilyzna1.entity;
 import com.example.bilyzna1.Type;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,16 +36,16 @@ public class Clothes {
     private int price;
     @Column(name = "type")
     private Type type;
-    @Column(name = "size")
-    @ElementCollection
-    private List<String> size;
+    @OneToMany(mappedBy = "clothes",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @BatchSize(size = 100)
+    private List<Size> size = new ArrayList<>();
     @Column(name = "description", length = 1000)
     private String description;
     @Column(name = "additionaltype")
     private String additionaltype;
-    @Column(name = "images")
-    @ElementCollection
-    private List<String> images;
+    @OneToMany(mappedBy = "clothes",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @BatchSize(size = 100)
+    private List<Image> images = new ArrayList<>();
     @Column(name = "date")
     @CreationTimestamp
     private LocalDateTime createdOn;

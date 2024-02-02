@@ -57,10 +57,10 @@ public class SecurityConfig {
                 .exceptionHandling(exceptions->exceptions.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                 .sessionManagement(sesssion->sesssion.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize->authorize
-                        .requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll()
-                        .requestMatchers("/auth/user/**").authenticated()
-                        .requestMatchers("/auth/admin/**").authenticated()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+//                        .requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll()
+//                        .requestMatchers("/auth/user/**").authenticated()
+//                        .requestMatchers("/auth/admin/**").authenticated()
+//                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().permitAll())
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);

@@ -5,16 +5,17 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "photos")
+@Table(name = "sizes")
 @Data
-public class Image {
+public class Size {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
     @ManyToOne
     @JoinColumn(name = "clothes_id")
     @JsonIgnore
     private Clothes clothes;
-    @Column(name = "link",length = 10000)
-    private String link;
+    @Column(name = "size")
+    private String size;
+
 }
