@@ -68,6 +68,8 @@ public class ClothesController {
     public ResponseEntity<Clothes> add(@RequestBody Clothes clothes){
         var images = clothes.getImages();
         images.stream().forEach(n->n.setClothes(clothes));
+        var sizes = clothes.getSize();
+        sizes.stream().forEach(n->n.setClothes(clothes));
         clothesService.add(clothes);
 //        if(!alreadyExist(clothes.getName())){
 //            SearchItems searchItem = new SearchItems();
@@ -88,6 +90,10 @@ public class ClothesController {
 
     @PostMapping("/admin/{id}")
     public ResponseEntity<Optional<Clothes>> update(@PathVariable Long id,@RequestBody Clothes clothes){
+        var images = clothes.getImages();
+        images.stream().forEach(n->n.setClothes(clothes));
+        var sizes = clothes.getSize();
+        sizes.stream().forEach(n->n.setClothes(clothes));
         clothesService.update(id,clothes);
         return ResponseEntity.ok(clothesService.findById(id));
     }
