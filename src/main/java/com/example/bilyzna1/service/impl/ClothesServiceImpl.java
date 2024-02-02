@@ -2,6 +2,7 @@ package com.example.bilyzna1.service.impl;
 
 import com.example.bilyzna1.Type;
 import com.example.bilyzna1.entity.Clothes;
+import com.example.bilyzna1.entity.Size;
 import com.example.bilyzna1.repository.ClothesRepository;
 import com.example.bilyzna1.service.ClothesService;
 import org.springframework.stereotype.Service;
@@ -86,10 +87,10 @@ public class ClothesServiceImpl implements ClothesService {
         return clothesRepository.findByTypeAndBrand(type,brand);
     }
 
-//    @Override
-//    public List<Clothes> findByTypeAndSize(Type type, String size) {
-//        return clothesRepository.findByTypeAndSize(type,size);
-//    }
+    @Override
+    public List<Clothes> findByTypeAndSize(Type type, Size size) {
+        return clothesRepository.findByTypeAndSize(type,size);
+    }
 
     @Override
     public List<Clothes> findByTypeAndAdditionalType(Type type, String additionaltype) {

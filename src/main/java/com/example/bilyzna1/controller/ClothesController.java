@@ -66,6 +66,8 @@ public class ClothesController {
     }
     @PostMapping("/admin/add")
     public ResponseEntity<Clothes> add(@RequestBody Clothes clothes){
+        var images = clothes.getImages();
+        images.stream().forEach(n->n.setClothes(clothes));
         clothesService.add(clothes);
 //        if(!alreadyExist(clothes.getName())){
 //            SearchItems searchItem = new SearchItems();
@@ -153,11 +155,11 @@ public class ClothesController {
         return  clothesService.findByTypeAndBrand(type,brand);
 
     }
-//    @GetMapping("/FindByTypeAndSize")
-//    public List<Clothes> findTypeAndSize(@RequestParam Type type,
-//                                     @RequestParam String size){
-//        return clothesService.findByTypeAndSize(type,size);
-//    }
+    @GetMapping("/FindByTypeAndSize")
+    public List<Clothes> findTypeAndSize(@RequestParam Type type,
+                                     @RequestParam Size size){
+        return clothesService.findByTypeAndSize(type,size);
+    }
 
 
     @GetMapping("/FindByTypeAndAdditionalType")
