@@ -36,14 +36,14 @@ public class Clothes {
     private int price;
     @Column(name = "type")
     private Type type;
-    @OneToMany(mappedBy = "clothes",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "clothes",cascade = CascadeType.ALL, fetch = FetchType.EAGER,orphanRemoval = true)
     @BatchSize(size = 100)
     private List<Size> size = new ArrayList<>();
     @Column(name = "description", length = 1000)
     private String description;
     @Column(name = "additionaltype")
     private String additionaltype;
-    @OneToMany(mappedBy = "clothes",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "clothes",cascade = CascadeType.ALL, fetch = FetchType.EAGER,orphanRemoval = true)
     @BatchSize(size = 100)
     private List<Image> images = new ArrayList<>();
     @Column(name = "date")

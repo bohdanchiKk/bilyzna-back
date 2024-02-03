@@ -5,7 +5,9 @@ import com.example.bilyzna1.entity.Clothes;
 import com.example.bilyzna1.entity.Image;
 import com.example.bilyzna1.entity.SearchItems;
 import com.example.bilyzna1.entity.Size;
+import com.example.bilyzna1.repository.ImageRepository;
 import com.example.bilyzna1.repository.SearchItemsRepository;
+import com.example.bilyzna1.repository.SizeRepository;
 import com.example.bilyzna1.service.ClothesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @RestController
@@ -21,41 +24,46 @@ import java.util.stream.Collectors;
 public class ClothesController {
     private ClothesService clothesService;
     private SearchItemsRepository searchItemsRepository;
+    private SizeRepository sizeRepository;
+    private ImageRepository imageRepository;
     @Autowired
-    public ClothesController(ClothesService clothesService,SearchItemsRepository searchItemsRepository)
+    public ClothesController(ClothesService clothesService,SearchItemsRepository searchItemsRepository,
+                             SizeRepository sizeRepository,ImageRepository imageRepository)
     {
         this.clothesService = clothesService;
         this.searchItemsRepository = searchItemsRepository;
+        this.sizeRepository = sizeRepository;
+        this.imageRepository = imageRepository;
     }
-    @GetMapping("/c/c")
-    public void createClothes(){
-        Random random = new Random();
-        for(int i = 0; i<100; i++){
-            Clothes clothes = new Clothes();
-            clothes.setName(String.valueOf(random.nextInt(10000)));
-            clothes.setBrand(String.valueOf(random.nextInt(10000)));
-            clothes.setArticle(String.valueOf(random.nextInt(10000)));
-            clothes.setAmount(String.valueOf(random.nextInt(10000)));
-            clothes.setPrice((random.nextInt(10000)));
-            clothes.setType(Type.bra);
-            List<Image> imageList = new ArrayList<>();
-            List<Size> sizeList = new ArrayList<>();
-            for(int j =0; j<30; j++){
-                Size size = new Size();
-                size.setSize("M");
-                size.setClothes(clothes);
-                sizeList.add(size);
-                Image image = new Image();
-                image.setLink("sdfklasjdfkajsdfklasjdfklasjdfklasdf");
-                image.setClothes(clothes);
-                imageList.add(image);
-            }
-            clothes.setSize(sizeList);
-            clothes.setDescription("asdfgklasdjfkncmvbnjkalsdfkasjdfklajsdfkjaskdlcxmnvm,ncxvbm,nxcvjsadkfl");
-            clothes.setImages(imageList);
-            clothesService.add(clothes);
-        }
-    }
+//    @GetMapping("/c/c")
+//    public void createClothes(){
+//        Random random = new Random();
+//        for(int i = 0; i<100; i++){
+//            Clothes clothes = new Clothes();
+//            clothes.setName(String.valueOf(random.nextInt(10000)));
+//            clothes.setBrand(String.valueOf(random.nextInt(10000)));
+//            clothes.setArticle(String.valueOf(random.nextInt(10000)));
+//            clothes.setAmount(String.valueOf(random.nextInt(10000)));
+//            clothes.setPrice((random.nextInt(10000)));
+//            clothes.setType(Type.bra);
+//            List<Image> imageList = new ArrayList<>();
+//            List<Size> sizeList = new ArrayList<>();
+//            for(int j =0; j<30; j++){
+//                Size size = new Size();
+//                size.setSize("M");
+//                size.setClothes(clothes);
+//                sizeList.add(size);
+//                Image image = new Image();
+//                image.setLink("sdfklasjdfkajsdfklasjdfklasjdfklasdf");
+//                image.setClothes(clothes);
+//                imageList.add(image);
+//            }
+//            clothes.setSize(sizeList);
+//            clothes.setDescription("asdfgklasdjfkncmvbnjkalsdfkasjdfklajsdfkjaskdlcxmnvm,ncxvbm,nxcvjsadkfl");
+//            clothes.setImages(imageList);
+//            clothesService.add(clothes);
+//        }
+//    }
 
     /** ADMIN PANEL */
 
@@ -70,14 +78,8 @@ public class ClothesController {
         images.stream().forEach(n->n.setClothes(clothes));
         var sizes = clothes.getSize();
         sizes.stream().forEach(n->n.setClothes(clothes));
+
         clothesService.add(clothes);
-//        if(!alreadyExist(clothes.getName())){
-//            SearchItems searchItem = new SearchItems();
-//            searchItem.setName(clothes.getName());
-//            searchItem.setImage(clothes.getImage1());
-//            searchItemsRepository.save(searchItem);
-//            return ResponseEntity.ok(clothes);
-//        }
         return ResponseEntity.ok(clothes);
     }
     public boolean alreadyExist(String name){
@@ -90,10 +92,25 @@ public class ClothesController {
 
     @PostMapping("/admin/{id}")
     public ResponseEntity<Optional<Clothes>> update(@PathVariable Long id,@RequestBody Clothes clothes){
-        var images = clothes.getImages();
+          var images = clothes.getImages();
+          var sizes = clothes.getSize();
+          images.stream().forEach(c->{
+              var deletedId = c.getId();
+              imageRepository.deleteById(deletedId);
+          });
+          sizes.stream().forEach(c->{
+              var deletedId = c.getId();
+              sizeRepository.deleteById(deletedId);
+          });
+
+//        var images = clothes.getImages();
         images.stream().forEach(n->n.setClothes(clothes));
-        var sizes = clothes.getSize();
+//        var sizes = clothes.getSize();
         sizes.stream().forEach(n->n.setClothes(clothes));
+//        var newClothes = clothesService.findById(id).orElse(null);
+//        Size newSize = new Size();
+//        newClothes.getSize().add()
+
         clothesService.update(id,clothes);
         return ResponseEntity.ok(clothesService.findById(id));
     }
