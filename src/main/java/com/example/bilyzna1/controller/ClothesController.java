@@ -92,24 +92,19 @@ public class ClothesController {
 
     @PostMapping("/admin/{id}")
     public void update(@PathVariable Long id,@RequestBody Clothes c){
-        clothesService.update(c.getName(),c.getBrand(),c.getArticle(),c.getAmount(),c.getPrice()
-                ,c.getType(),c.getDescription(),c.getAdditionaltype(),id);
-          var oldClothes = clothesService.findById(id).orElse(null);
-          var images = oldClothes.getImages();
-          var sizes = oldClothes.getSize();
-          images.stream().forEach(image -> imageRepository.deleteById(image.getId()));
-          sizes.stream().forEach(size -> sizeRepository.deleteById(size.getId()));
-          var newImages = c.getImages();
-          var newSizes = c.getSize();
-          newImages.forEach(newImage->{
-              newImage.setClothes(c);
-              imageRepository.save(newImage);
-          });
-          newSizes.forEach(newSize->{
-              newSize.setClothes(c);
-              sizeRepository.save(newSize);
-          });
+        imageRepository.delete(id);
+        sizeRepository.delete(id);
+
+        var newImage = c.getImages();
+        var newSize = c.getSize();
+
+        clothesService.deleteById(id);
+
+        newImage.stream().forEach(image -> image.setClothes(c));
+        newSize.stream().forEach(size -> size.setClothes(c));
+        clothesService.add(c);
     }
+
 
     @DeleteMapping("/admin/{id}")
     public ResponseEntity<String> update(@PathVariable Long id){
