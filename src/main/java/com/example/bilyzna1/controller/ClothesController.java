@@ -94,16 +94,21 @@ public class ClothesController {
     public void update(@PathVariable Long id,@RequestBody Clothes c){
         clothesService.update(c.getName(),c.getBrand(),c.getArticle(),c.getAmount(),c.getPrice()
                 ,c.getType(),c.getDescription(),c.getAdditionaltype(),id);
-//          var oldClothes = clothesService.findById(id).orElse(null);
-//          var images = oldClothes.getImages();
-//          var sizes = oldClothes.getSize();
-//          images.stream().forEach(image -> imageRepository.deleteById(image.getId()));
-//          sizes.stream().forEach(size -> sizeRepository.deleteById(size.getId()));
-//          var newImages = c.getImages();
-//          var newSizes = c.getSize();
-//          newImages.forEach(newImage->newImage.setClothes(c));
-//          newSizes.forEach(newSize->newSize.setClothes(c));
-//
+          var oldClothes = clothesService.findById(id).orElse(null);
+          var images = oldClothes.getImages();
+          var sizes = oldClothes.getSize();
+          images.stream().forEach(image -> imageRepository.deleteById(image.getId()));
+          sizes.stream().forEach(size -> sizeRepository.deleteById(size.getId()));
+          var newImages = c.getImages();
+          var newSizes = c.getSize();
+          newImages.forEach(newImage->{
+              newImage.setClothes(c);
+              imageRepository.save(newImage);
+          });
+          newSizes.forEach(newSize->{
+              newSize.setClothes(c);
+              sizeRepository.save(newSize);
+          });
     }
 
     @DeleteMapping("/admin/{id}")
