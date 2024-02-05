@@ -91,28 +91,18 @@ public class ClothesController {
     }
 
     @PostMapping("/admin/{id}")
-    public ResponseEntity<Optional<Clothes>> update(@PathVariable Long id,@RequestBody Clothes clothes){
-          var images = clothes.getImages();
-          var sizes = clothes.getSize();
-          images.stream().forEach(c->{
-              var deletedId = c.getId();
-              imageRepository.deleteById(deletedId);
-          });
-          sizes.stream().forEach(c->{
-              var deletedId = c.getId();
-              sizeRepository.deleteById(deletedId);
-          });
-
-//        var images = clothes.getImages();
-        images.stream().forEach(n->n.setClothes(clothes));
-//        var sizes = clothes.getSize();
-        sizes.stream().forEach(n->n.setClothes(clothes));
-//        var newClothes = clothesService.findById(id).orElse(null);
-//        Size newSize = new Size();
-//        newClothes.getSize().add()
-
-        clothesService.update(id,clothes);
-        return ResponseEntity.ok(clothesService.findById(id));
+    public void update(@PathVariable Long id,@RequestBody Clothes c){
+          var oldClothes = clothesService.findById(id).orElse(null);
+          var images = oldClothes.getImages();
+          var sizes = oldClothes.getSize();
+          images.stream().forEach(image -> imageRepository.deleteById(image.getId()));
+          sizes.stream().forEach(size -> sizeRepository.deleteById(size.getId()));
+          var newImages = c.getImages();
+          var newSizes = c.getSize();
+          newImages.forEach(newImage->newImage.setClothes(c));
+          newSizes.forEach(newSize->newSize.setClothes(c));
+        clothesService.update(c.getName(),c.getBrand(),c.getArticle(),c.getAmount(),c.getPrice()
+                ,c.getType(),c.getDescription(),c.getAdditionaltype(),id);
     }
 
     @DeleteMapping("/admin/{id}")

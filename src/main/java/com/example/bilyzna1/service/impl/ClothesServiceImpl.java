@@ -112,6 +112,11 @@ public class ClothesServiceImpl implements ClothesService {
         return clothesRepository.findByTypeAndBrandAAndAdditionaltype(type,brand,additionaltype);
     }
 
+    @Override
+    public void update(String name, String brand, String article, String amount, int price, Type type, String description, String addtype, Long id) {
+        clothesRepository.update(name,brand,article,amount,price,type,description,addtype,id);
+    }
+
 //    @Override
 //    public List<Clothes> findByTypeAndSizeAndAdditionalType(Type type, String size, String additionaltype) {
 //        return clothesRepository.findByTypeAndSizeAndAdditionaltype(type,size,additionaltype);

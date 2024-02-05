@@ -3,7 +3,9 @@ package com.example.bilyzna1.repository;
 import com.example.bilyzna1.Type;
 import com.example.bilyzna1.entity.Clothes;
 import com.example.bilyzna1.entity.Size;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -50,6 +52,18 @@ public interface ClothesRepository extends JpaRepository<Clothes, Long> {
 
 //@Query("SELECT c FROM Clothes c WHERE c.name ILIKE :word% AND c.image1 IS NOT NULL GROUP BY c.id, c.name, c.image1 ORDER BY MAX(c.createdOn) DESC LIMIT 5")
 //Optional<List<Clothes>> findByFirstWord(@Param("word") String word);
-
+    @Modifying
+    @Transactional
+    @Query("update Clothes c set c.name=:name,c.brand=:brand,c.article=:article,c.amount=:amount,c.price=:price," +
+            "c.type=:type,c.description=:description,c.additionaltype=:additionaltype where c.id=:clothes_id")
+    void update(@Param("name") String name,
+                @Param("brand") String brand,
+                @Param("article") String article,
+                @Param("amount") String amount,
+                @Param("price") int price,
+                @Param("type") Type type,
+                @Param("description") String description,
+                @Param("additionaltype") String additionaltype,
+                @Param("clothes_id")Long id);
 
 }
