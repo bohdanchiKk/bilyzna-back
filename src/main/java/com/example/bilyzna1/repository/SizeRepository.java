@@ -21,16 +21,15 @@ public interface SizeRepository extends JpaRepository<Size,Long> {
     List<Size> getByClothesSizeTypeBrand(@Param("size")String size
             , @Param("type")Type type, @Param("brand")String brand);
     @Query("select s from Size s where s.size=:size and s.clothes.type=:type and s.clothes.brand=:brand and s.clothes.additionaltype=:additionaltype")
-    @Modifying
-    @Transactional
     List<Size> getByClothesTypeBrandSizeAdditionalType(@Param("type") Type type,
                                                        @Param("brand") String brand,
                                                        @Param("size")String size,
                                                        @Param("additionaltype")String additionaltype);
     @Query("select s from Size s where s.size=:size and s.clothes.type=:type and s.clothes.additionaltype=:additionaltype")
-    @Modifying
-    @Transactional
     List<Size> getByClothesTypeSizeAdditionalType(@Param("type") Type type,
                                                   @Param("size") String size,
                                                   @Param("additionaltype") String additionaltype);
+    @Query("select s from Size s where s.size=:size and s.clothes.type=:type")
+    List<Size> getByClothesTypeSize(@Param("type") Type type,
+                                    @Param("size") Size size);
 }
