@@ -171,7 +171,7 @@ public class ClothesController {
     }
     @GetMapping("/FindByTypeAndSize")
     public List<Clothes> findTypeAndSize(@RequestParam Type type,
-                                     @RequestParam Size size){
+                                     @RequestParam String size){
         List<Clothes> newList = new ArrayList<>();
         sizeRepository.getByClothesTypeSize(type,size).forEach(size1 -> newList.add(size1.getClothes()));
         return newList;

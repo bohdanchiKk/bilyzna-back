@@ -31,5 +31,5 @@ public interface SizeRepository extends JpaRepository<Size,Long> {
                                                   @Param("additionaltype") String additionaltype);
     @Query("select s from Size s where s.size=:size and s.clothes.type=:type")
     List<Size> getByClothesTypeSize(@Param("type") Type type,
-                                    @Param("size") Size size);
+                                    @Param("size") String size);
 }
