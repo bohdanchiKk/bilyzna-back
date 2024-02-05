@@ -26,7 +26,7 @@ public interface ClothesService {
     List<Clothes> findByTypeAndBrand(Type type,String brand);
     List<Clothes> findByTypeAndSize(Type type, Size size);
     List<Clothes> findByTypeAndAdditionalType(Type type,String additionaltype);
-//    List<Clothes> findByTypeAndBrandAndSize(Type type,String brand,String size);
+    List<Clothes> findByTypeAndBrandAndSize(Type type,String brand,String size);
 //    List<Clothes> findByTypeAndBrandAndSizeAndAdditionalType(Type type,String brand,String size,String additionaltype);
     List<Clothes> findByTypeAndBrandAndAdditionalType(Type type,String brand,String additionaltype);
 //    List<Clothes> findByTypeAndSizeAndAdditionalType(Type type,String size,String additionaltype);
