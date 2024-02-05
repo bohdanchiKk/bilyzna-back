@@ -28,8 +28,9 @@ public interface ClothesRepository extends JpaRepository<Clothes, Long> {
     List<Clothes> findByTypeAndBrand(Type type,String brand);
     List<Clothes> findByTypeAndSize(Type type, Size size);
     List<Clothes> findByTypeAndAdditionaltype(Type type,String additionaltype);
-    @Query("select c from Clothes c where c.type=:type and c.brand=:brand and c.size=:size")
-    List<Clothes> findByTypeAndBrandAndSize(@Param("type") Type type,@Param("brand") String brand,@Param("size") String size);
+//    @Query(value = "SELECT * FROM clothes c JOIN sizes s ON c.id = s.clothes_id WHERE c.type = :type AND c.brand = :brand AND s.size = :size", nativeQuery = true)
+//@Query("SELECT DISTINCT c FROM Clothes c JOIN c.sizes s WHERE c.type = :type AND c.brand = :brand AND s.size = :size")
+//    List<Clothes> findByTypeAndBrandAndSize( @Param("type") Type type, @Param("brand") String brand, @Param("size") String size);
 //    @Query("SELECT c FROM Clothes c WHERE c.type = :type AND c.brand = :brand AND c.size = :size AND c.additionaltype = :additionaltype")
 //    List<Clothes> findByTypeAndBrandAndSizeaAndAdditionaltype(
 //            @Param("type") Type type,

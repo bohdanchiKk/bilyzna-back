@@ -182,21 +182,25 @@ public class ClothesController {
         return  clothesService.findByTypeAndAdditionalType(type,additionaltype);
 
     }
-//    @GetMapping("/FindByTypeAndBrandAndSize")
-//    public List<Clothes> findTypeAndBrandAndSize(@RequestParam Type type,
-//                                                   @RequestParam String brand,
-//                                                   @RequestParam String size){
-//        return clothesService.findByTypeAndBrandAndSize(type,brand,size);
-//    }
-//    @GetMapping("/FindByTypeAndBrandAndSizeAndAdditionalType")
-//    public List<Clothes> findByTypeAndBrandAndSizeAndAdditionalType(@RequestParam Type type,
-//                                                 @RequestParam String brand,
-//                                                 @RequestParam String size,
-//                                                                    @RequestParam String additionaltype){
-//        return clothesService.findByTypeAndBrandAndSizeAndAdditionalType(type,brand,size,additionaltype);
-//
-//
-//    }
+    @GetMapping("/FindByTypeAndBrandAndSize")
+    public List<Clothes> findTypeAndBrandAndSize(@RequestParam Type type,
+                                                   @RequestParam String brand,
+                                                   @RequestParam String size){
+        List<Clothes> newList = new ArrayList<>();
+        sizeRepository.getByClothesSizeTypeBrand(size, type, brand).forEach(size1 -> newList.add(size1.getClothes()));
+        return newList;
+
+    }
+    @GetMapping("/FindByTypeAndBrandAndSizeAndAdditionalType")
+    public List<Clothes> findByTypeAndBrandAndSizeAndAdditionalType(@RequestParam Type type,
+                                                 @RequestParam String brand,
+                                                 @RequestParam String size,
+                                                                    @RequestParam String additionaltype){
+        List<Clothes> newList = new ArrayList<>();
+        sizeRepository.getByClothesTypeBrandSizeAdditionalType(type, brand, size, additionaltype).forEach(size1 -> newList.add(size1.getClothes()));
+        return newList;
+
+    }
     @GetMapping("/FindByTypeAndBrandAndAdditionalType")
     public List<Clothes> findByTypeAndBrandAndSizeAndAdditionalType(@RequestParam Type type,
                                                                     @RequestParam String brand,
@@ -204,13 +208,14 @@ public class ClothesController {
         return clothesService.findByTypeAndBrandAndAdditionalType(type,brand,additionaltype);
     }
 
-//    @GetMapping("/FindByTypeAndSizeAndAdditionalType")
-//    public List<Clothes> findByTypeAndSizeAndAdditionalType(@RequestParam Type type,
-//                                                                    @RequestParam String size,
-//                                                                    @RequestParam String additionaltype){
-//        return clothesService.findByTypeAndSizeAndAdditionalType(type,size,additionaltype);
-//
-//        }
+    @GetMapping("/FindByTypeAndSizeAndAdditionalType")
+    public List<Clothes> findByTypeAndSizeAndAdditionalType(@RequestParam Type type,
+                                                                    @RequestParam String size,
+                                                                    @RequestParam String additionaltype){
+        List<Clothes> newList = new ArrayList<>();
+        sizeRepository.getByClothesTypeSizeAdditionalType(type,size,additionaltype).forEach(size1 -> newList.add(size1.getClothes()));
+        return newList;
+        }
     @GetMapping("/id/{id}")
     public Optional<Clothes> findOne(@PathVariable Long id) {
         return clothesService.findById(id);
